@@ -45,25 +45,22 @@ def match_ends(words):
 
 
 def front_x(words):
-   # words_copy = words.copy()
-
-    non_x_words = []
-    for word in words:
-        if word[0] != "x":
-            non_x_words.append(word)
-    non_x_words.sort()
 
     x_words = []
+    non_x_words = []
+
     for word in words:
         if word[0] == "x":
             x_words.append(word)
-    x_words.sort()
+        else:
+            non_x_words.append(word)
 
-    new_words = x_words.extend(non_x_words)
+    sorted_x_words = sorted(x_words)
+    sorted_non_x_words = sorted(non_x_words)
 
-    print(new_words)
+    sorted_x_words.extend(sorted_non_x_words)
 
-    return new_words
+    return sorted_x_words
 
 
 # C. sort_last
@@ -76,8 +73,8 @@ def front_x(words):
 
 
 def sort_last(tuples):
-    # your code here
-    return
+    new_tuples = sorted(tuples, key=lambda tup: tup[-1])
+    return new_tuples
 
 
 # D. remove_adjacent
@@ -90,8 +87,11 @@ def sort_last(tuples):
 
 
 def remove_adjacent(nums):
-    # your code here
-    return
+    new_nums = []
+    for i, num in enumerate(nums):
+        if i == 0 or (i > 0 and num != nums[i-1]):
+            new_nums.append(num)
+    return new_nums
 
 
 # E. zip_merge
@@ -105,8 +105,15 @@ def remove_adjacent(nums):
 
 
 def zip_merge(list1, list2):
-    # your code here
-    return
+    """
+    result = []
+    for char in range(len(list1)):
+        result.append(list1[char] + list2[char])
+    return result
+    # this works too
+    """
+
+    return ["".join(elem) for elem in zip(list1, list2)]
 
 
 # F. empty_filter
@@ -119,8 +126,11 @@ def zip_merge(list1, list2):
 
 
 def empty_filter(list1):
-    # your code here
-    return
+    new_list = []
+    for string in list1:
+        if string:
+            new_list.append(string)
+    return new_list
 
 
 # G. linear_merge
@@ -135,5 +145,12 @@ def empty_filter(list1):
 
 
 def linear_merge(list1, list2):
-    # your code here
-    return
+    new_list = []
+    while list1 and list2:
+        if list1[0] < list2[0]:
+            new_list.append(list1.pop(0))
+        else:
+            new_list.append(list2.pop(0))
+    new_list.extend(list1)
+    new_list.extend(list2)
+    return new_list
