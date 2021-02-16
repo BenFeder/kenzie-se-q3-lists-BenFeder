@@ -26,8 +26,11 @@ __author__ = "Benjamin Feder"
 
 
 def match_ends(words):
-    # your code here
-    return
+    count = 0
+    for string in words:
+        if len(string) >= 2 and string[0] == string[-1]:
+            count += 1
+    return count
 
 
 # B. front_x
@@ -42,8 +45,25 @@ def match_ends(words):
 
 
 def front_x(words):
-    # your code here
-    return
+   # words_copy = words.copy()
+
+    non_x_words = []
+    for word in words:
+        if word[0] != "x":
+            non_x_words.append(word)
+    non_x_words.sort()
+
+    x_words = []
+    for word in words:
+        if word[0] == "x":
+            x_words.append(word)
+    x_words.sort()
+
+    new_words = x_words.extend(non_x_words)
+
+    print(new_words)
+
+    return new_words
 
 
 # C. sort_last
